@@ -1,5 +1,26 @@
 import os
 import subprocess
+from google.genai import types
+
+schema_run_python_file = types.FunctionDeclaration(
+    name="run_python_file",
+    description="Run a python file and return the STDOUT or STDERR",
+    parameters=types.Schema(
+        required=["file_path"],
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="File path to the file we wish to write on, relative to the working directory"
+            ),
+            "args": types.Schema(
+                type=types.Type.ARRAY,
+                description="Arguments to be passed down to the python execution command",
+                items=types.Schema(type=types.Type.STRING)
+            )
+        }
+    )
+)
 
 def run_python_file(working_directory, file_path, args=None):
     try:
