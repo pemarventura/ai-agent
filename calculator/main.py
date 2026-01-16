@@ -11,9 +11,10 @@ def main():
         print("Calculator App")
         print('Usage: python main.py "<expression>"')
         print('Example: python main.py "3 + 5"')
-        return
+        sys.exit(1) # Added to exit if no arguments are provided
 
     expression = " ".join(sys.argv[1:])
+    print(f"Expression passed to evaluate: {expression}") # Debug print
     try:
         result = calculator.evaluate(expression)
         if result is not None:
